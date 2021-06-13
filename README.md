@@ -1,2 +1,9 @@
-# wechatspecter
-微信幽灵
+# 微信幽灵
+
+开启新篇章……
+
+version: 1.0
+
+
+
+
