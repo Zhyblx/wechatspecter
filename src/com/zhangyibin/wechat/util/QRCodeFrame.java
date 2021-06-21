@@ -24,7 +24,7 @@ public class QRCodeFrame extends JFrame {
     /**
      * 启动应用程序
      *
-     * @param args
+     * @param args(参数)
      * @author zhangyibin
      */
     public static void main(String[] args) {
@@ -42,13 +42,13 @@ public class QRCodeFrame extends JFrame {
         });
     }
 
+    @SuppressWarnings("serial")
     /**
      * 创建窗口;filePath为图片地址
      *
      * @param filePath
      * @author zhangyibin
      */
-    @SuppressWarnings("serial")
     public QRCodeFrame(final String filePath) {
         this.setResizable(false);
         this.setTitle("使用手机微信扫码登录-(洛基版)");//扫码登陆微信

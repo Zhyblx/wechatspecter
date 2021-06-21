@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #080808;}
+.s3 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+README.md</font>
+</center></td></tr></table>
+<pre><span class="s0"># </span><span class="s2">微信幽灵</span>
+
+<span class="s2">微信幽灵</span><span class="s1">(</span><span class="s2">WeChatSpecter</span><span class="s1">)</span><span class="s2">基于网页版微信实现了一套使用Java语言编写的消息管理机制。</span>
+
+<span class="s0">### </span><span class="s2">快速上手</span>
+<span class="s2">工具上手极其简单；如以下案例：</span>
+
+    <span class="s3">package com.zhangyibin.wechat.wechatapp;</span>
+    <span class="s3">public class StartWechatApp {</span>
+    <span class="s3">/**</span>
+    <span class="s3">* 启动微信幽灵程序</span>
+    <span class="s3">* @author zhangyibin</span>
+    <span class="s3">*/</span>
+    <span class="s3">public static void main(String[] args) {</span>
+        <span class="s3">String[] partnerBlackList = new String[]{&quot;用户1&quot;, &quot;用户2&quot;, &quot;用户3&quot;};// 黑名单列表</span>
+        <span class="s3">String message = &quot;你好！我正在休息，稍后回复你消息。&quot;;</span>
+        <span class="s3">WechatApp wechatApp = WechatApp.getWechatApp();</span>
+        <span class="s3">wechatApp.startWechatApp(message, partnerBlackList);</span>
+    
+        <span class="s3">}</span>
+    <span class="s3">}</span>
+
+<span class="s2">上面的例子就是根据用户的休息场景对特定的好友名单实现了统一的消息回复机制。</span>
+
+<span class="s0">### </span><span class="s2">实现机制</span>
+
+<span class="s2">· 获取到uuid；&lt;br&gt;</span>
+<span class="s2">· 基于uuid可成功获得微信登陆二维码；&lt;br&gt;</span>
+<span class="s2">· 使用手机微信扫码登录；&lt;br&gt;</span>
+<span class="s2">· 初始化消息和微信好友列表；&lt;br&gt;</span>
+<span class="s2">· 启动微信消息监听机制；&lt;br&gt;</span>
+<span class="s2">· 获得好友消息内容可实现消息回复；&lt;br&gt;</span>
+
+<span class="s0">### </span><span class="s2">API参考</span>
+<span class="s2">点击查看：</span><span class="s1">[</span><span class="s2">API文件</span><span class="s1">](</span><span class="s2">docs/index.html</span><span class="s1">) </span><span class="s2">&lt;br&gt;</span>
+<span class="s2">下载文件</span><span class="s1">(</span><span class="s2">版本：1.0.2</span><span class="s1">(</span><span class="s2">Beta</span><span class="s1">))</span><span class="s2">：</span><span class="s1">[</span><span class="s2">WeChatSpecter.jar</span><span class="s1">](</span><span class="s2">out/artifacts/wechatspecter_jar/wechatspecter.jar</span><span class="s1">)</span>
+
+<span class="s0">### </span><span class="s2">开发支持</span>
+<span class="s2">本项目不允许应用于任何商业场景；如果因使用本工具的能力从而触犯了国家的相关法律法规后果需自行承担。</span>
+
+</pre>
+</body>
+</html>

@@ -7,16 +7,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Matchers {
-
+    public static @Nullable
     /**
      * 正则匹配器
      *
-     * @param regex
-     * @param str
-     * @return
+     * @param regex(正则表达式)
+     * @param str(文本内容)
+     * @return null
      * @author zhangyibin
      */
-    public static @Nullable
     String match(String regex, String str) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(str);

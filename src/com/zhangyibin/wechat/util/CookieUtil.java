@@ -12,7 +12,7 @@ public class CookieUtil {
      * 网页版微信登陆所使用的Cookie工具
      * 作用：获取浏到登陆使用的cookie
      *
-     * @param request
+     * @param request(Http请求)
      * @return 返回cookie代码
      * @author zhangyibin
      */

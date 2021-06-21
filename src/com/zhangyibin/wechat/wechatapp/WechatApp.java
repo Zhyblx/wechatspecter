@@ -21,10 +21,12 @@ public class WechatApp extends WechatMsg {
     /**
      * 启动微信App
      *
+     * @param message(消息内容)
+     * @param partnerBlackList(好友黑名单列表)
      * @author zhangyibin
      */
 
-    public void startWechatApp() {
+    public void startWechatApp(String message, String... partnerBlackList) {
         WechatApp wechatApp = new WechatApp();
         String uuid = wechatApp.UUID;
 
@@ -86,7 +88,7 @@ public class WechatApp extends WechatMsg {
             }
             System.out.println("[张益斌提示]-获取联系人成功");
             System.out.println("[张益斌提示]-共有" + wechatApp.contactList.size() + "位联系人");
-            wechatApp.listenMsgMode();// 监听微信消息
+            wechatApp.listenMsgMode(message, partnerBlackList);// 监听微信消息
 
         }
     }

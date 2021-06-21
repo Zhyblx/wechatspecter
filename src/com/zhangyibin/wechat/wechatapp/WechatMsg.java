@@ -168,10 +168,12 @@ public class WechatMsg extends WechatLogin {
     /**
      * 给微信好友回复消息
      *
-     * @param data
+     * @param data(收到的消息内容)
+     * @param message(消息内容)
+     * @param blackList(黑名单用户)
      * @author zhangyibin
      */
-    public void replyMessage(JSONObject data) {
+    public void replyMessage(JSONObject data, String message, String... blackList) {
         String partnerName = "";//好友名称
         if (null == data) {
             return;
@@ -189,31 +191,39 @@ public class WechatMsg extends WechatLogin {
                 System.out.println("[张益斌提示]-成功截获微信消息!");
 
             }
-            if (msgType == 1) {
-                System.out.println("来自好友" + partnerName + "的消息内容: " + receiveMessages);
-                String replyMessage = "";// ReplyMessage 回复好友消息
-                /*
-                 *后期迭代：
-                 * 1.可根据partnerName记录消息来自哪位好友
-                 * 2.可根据partnerName判断不回复具体好友的消息
-                 *
-                 */
-                replyMessage = "微信幽灵程序调试中，可能会对私信消息和群消息有干扰，请见谅！";
-                this.sendMessage(replyMessage, msg.getString("FromUserName")); // 回复好友消息
-                System.out.println("回复好友" + partnerName + "的消息内容: " + replyMessage);
+            /*
+             * 黑名单判断逻辑如下：
+             * 1.如果好友备注名称在黑名单列表中，那么系统自动回复预先设置好的消息内容"。
+             * 2.如果好友备注名称不在黑名单列表中，那么提示"不回复该好友消息!"(设置黑名单是对白名单好友表示尊重)。
+             *
+             */
+            for (String blackListName : blackList) {
+                if (partnerName.equals(blackListName)) {
+                    if (msgType == 1) {
+                        System.out.println("来自好友" + partnerName + "的消息内容: " + receiveMessages);
+                        String replyMessage = "";// ReplyMessage 回复好友消息
+                        replyMessage = message;
+                        this.sendMessage(replyMessage, msg.getString("FromUserName")); // 回复好友消息
+                        System.out.println("回复好友" + partnerName + "的消息内容: " + replyMessage);
 
+                    } else if (msgType == 3) {
+                        this.sendMessage("我识别不了图片消息", msg.getString("FromUserName"));
+                        System.out.println("回复好友" + partnerName + "的消息内容: " + "我识别不了图片消息");
 
-            } else if (msgType == 3) {
-                this.sendMessage("我识别不了图片消息", msg.getString("FromUserName"));
-                System.out.println("回复好友" + partnerName + "的消息内容: " + "我识别不了图片消息");
+                    } else if (msgType == 34) {
+                        this.sendMessage("我识别不了语音消息", msg.getString("FromUserName"));
+                        System.out.println("回复好友" + partnerName + "的消息内容: " + "我识别不了语音消息");
 
-            } else if (msgType == 34) {
-                this.sendMessage("我识别不了语音消息", msg.getString("FromUserName"));
-                System.out.println("回复好友" + partnerName + "的消息内容: " + "我识别不了语音消息");
+                    } else if (msgType == 42) {
+                        System.out.println("回复好友" + partnerName + "的消息内容: " + " 给你发了一张名片!");
 
-            } else if (msgType == 42) {
-                System.out.println("回复好友" + partnerName + "的消息内容: " + " 给你发了一张名片!");
+                    }
 
+                } else {
+                    System.out.println("来自好友" + partnerName + "的消息内容: " + receiveMessages);
+                    System.out.println("[张益斌提示]-不回复该好友消息!");
+
+                }
             }
         }
     }
@@ -222,7 +232,7 @@ public class WechatMsg extends WechatLogin {
      * 获得好友备注名称
      *
      * @param id (用户id)
-     * @return
+     * @return name(好友备注名称)
      * @author zhangyibin
      */
     public String getUserRemarkName(String id) {
@@ -248,9 +258,11 @@ public class WechatMsg extends WechatLogin {
     /**
      * 监听微信消息
      *
+     * @param message(消息内容)
+     * @param partnerBlackList(好友黑名单列表)
      * @author zhangyibin
      */
-    public void listenMsgMode() {
+    public void listenMsgMode(String message, String... partnerBlackList) {
         try {
             new Thread(
                     new Runnable() {
@@ -265,51 +277,60 @@ public class WechatMsg extends WechatLogin {
 
                             }
                             System.out.println("[张益斌提示]-进入消息监听模式 ...");
-                            int playWeChat = 0;
                             while (true) {
-                                int[] arr = messageSyncCheck();
-                                System.out.println("[张益斌提示]-监听模式：" + arr[0] + "," + arr[1]);
-                                if (arr[0] == 1101 && arr[1] == 0) {
-                                    System.out.println("[张益斌提示]-你在手机上登出了微信,再见!");
-                                    break;
-
-                                }
-                                if (arr[0] == 0) {
-                                    if (arr[1] == 2) {
-                                        JSONObject data = getNewNews();
-                                        replyMessage(data);
-
-                                    }
-                                    if (arr[1] == 6) {
-                                        JSONObject data = getNewNews();
-                                        replyMessage(data);
-
-                                    }
-                                    if (arr[1] == 7) {
-                                        playWeChat += 1;
-                                        System.err.println("[张益斌提示]-" + playWeChat + "你在手机上玩微信被我发现了");
-                                        getNewNews();
-
-                                    }
-                                    if (arr[1] == 3) {
-
-                                    }
-                                    if (arr[1] == 0) {
-                                        try {
-                                            Thread.sleep(3000);
-
-                                        } catch (InterruptedException e) {
-                                            //不处理异常
-
-                                        }
-                                    }
-                                } else {
+                                /*
+                                 * 回复消息程序跳转到标签处，间隔3秒监听一次消息
+                                 */
+                                //label:
+                                while (true) {
                                     try {
                                         Thread.sleep(3000);
-                                    } catch (InterruptedException e) {
-                                        //不处理异常
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
 
                                     }
+                                    int[] arr = messageSyncCheck();
+                                    System.out.println("[张益斌提示]-监听模式：" + arr[0] + "," + arr[1]);
+                                    if (arr[0] == 1101 && arr[1] == 0) {
+                                        System.out.println("[张益斌提示]-你在手机上登出了微信,再见!");
+                                        break;
+
+                                    }
+                                    if (arr[0] == 0) {
+                                        if (arr[1] == 2) {
+                                            System.out.println("[张益斌提示]-收到文本消息类型；");
+                                            JSONObject data = getNewNews();
+                                            replyMessage(data, message, partnerBlackList);
+                                            //break label;
+
+                                        }
+                                        if (arr[1] == 6) {
+                                            System.out.println("[张益斌提示]-收到未知消息类型；");
+                                            //break label;
+
+                                        }
+                                        if (arr[1] == 7) {
+                                            System.out.println("[张益斌提示]-收到未知消息类型；");
+                                            //break label;
+
+                                        }
+                                        if (arr[1] == 3) {
+                                            System.out.println("[张益斌提示]-收到未知消息类型；");
+                                            //break label;
+
+                                        }
+                                        if (arr[1] == 0) {
+                                            System.out.println("[张益斌提示]-收到未知消息类型；");
+                                            //break label;
+
+                                        }
+                                    } else {
+                                        System.out.println("[张益斌提示]-收到未知消息类型；");
+                                        //break label;
+
+                                    }
+
                                 }
                             }
                         }
