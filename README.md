@@ -35,6 +35,6 @@
 点击查看：[API文件](docs/index.html) <br>
 下载文件(版本：1.0.2(Beta))：[WeChatSpecter.jar](out/artifacts/wechatspecter_jar/wechatspecter.jar)
 
-### 开发支持
+### 免责声明
 本项目不允许应用于任何商业场景；如果因使用本工具的能力从而触犯了国家的相关法律法规后果需自行承担。
 
