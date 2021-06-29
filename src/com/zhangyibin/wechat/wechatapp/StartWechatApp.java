@@ -14,9 +14,9 @@ public class StartWechatApp {
             System.out.println(name);
 
         }
-        String message = "你好！我正在睡觉，稍后回复你消息。";
+        String message = "你好！我正在休息，稍后回复你消息。";
         WechatApp wechatApp = WechatApp.getWechatApp();
-        wechatApp.startWechatApp(message, partnerBlackList);
+        wechatApp.automaticallyReplyToBlacklistMessages(message, partnerBlackList);
 
     }
 }

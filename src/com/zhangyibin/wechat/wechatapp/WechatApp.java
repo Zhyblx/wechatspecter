@@ -19,17 +19,26 @@ public class WechatApp extends WechatMsg {
     }
 
     /**
-     * 启动微信App
+     * 启动微信App后，根据设置好友黑名单进行自动回复消息
      *
      * @param message(消息内容)
      * @param partnerBlackList(好友黑名单列表)
      * @author zhangyibin
      */
+    public void automaticallyReplyToBlacklistMessages(String message, String... partnerBlackList) {
+        WechatApp wechatApp = WechatApp.getWechatApp();
+        this.startWeChat(wechatApp); //启动微信
+        wechatApp.listenMsgMode(message, partnerBlackList);// 监听微信消息
 
-    public void startWechatApp(String message, String... partnerBlackList) {
-        WechatApp wechatApp = new WechatApp();
+    }
+
+    /**
+     * 启动微信
+     *
+     * @param wechatApp
+     */
+    private void startWeChat(WechatApp wechatApp) {
         String uuid = wechatApp.UUID;
-
         /*
          * 1.如没有获取到uuid，返回"UUID获取失败"；
          * 2.获取到uuid，则显示微信的登陆二维码
@@ -88,7 +97,6 @@ public class WechatApp extends WechatMsg {
             }
             System.out.println("[张益斌提示]-获取联系人成功");
             System.out.println("[张益斌提示]-共有" + wechatApp.contactList.size() + "位联系人");
-            wechatApp.listenMsgMode(message, partnerBlackList);// 监听微信消息
 
         }
     }
