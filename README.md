@@ -13,10 +13,20 @@
     * @author zhangyibin
     */
     public static void main(String[] args) {
-        String[] partnerBlackList = new String[]{"用户1", "用户2", "用户3"};// 黑名单列表
-        String message = "你好！我正在休息，稍后回复你消息。";
+        System.out.println("请设置黑名单好友(设置一组黑名单以逗号分割；例如：用户1,用户2,用户3)：");
+        String partnerBlack = new Scanner(System.in).nextLine();
+        String[] partnerBlackList = partnerBlack.split(",");
+        System.out.println("黑名单好友列表如下：");
+        for (String name : partnerBlackList) {
+            System.out.println("--" + name);
+
+        }
+        System.out.println("设置默认回复消息？\n " +
+                "1.设置：系统回复默认消息(可直接输入文字);\n " +
+                "2.不设置：系统调用图灵机器人答复消息;");
+        String message = new Scanner(System.in).nextLine();
         WechatApp wechatApp = WechatApp.getWechatApp();
-        wechatApp.startWechatApp(message, partnerBlackList);
+        wechatApp.automaticallyReplyToBlacklistMessages(message, partnerBlackList);
     
         }
     }
@@ -35,12 +45,13 @@
 ### API参考
 
 点击查看：[API文件](docs/index.html) <br>
-下载文件(版本：1.1.1)：[WeChatSpecter.jar](out/artifacts/wechatspecter_jar/wechatspecter.jar)
+下载文件(版本：1.1.2)：[WeChatSpecter.jar](out/artifacts/wechatspecter_jar/wechatspecter.jar)
 
 ### 版本更新
 
 |版本号|发布日期|
 |---|---|
+|v1.1.2|2021年7月20日|
 |v1.1.1|2021年6月29日|
 |v1.1.0|2021年6月22日|
 |v1.0.2(Beta)|2021年6月21日|

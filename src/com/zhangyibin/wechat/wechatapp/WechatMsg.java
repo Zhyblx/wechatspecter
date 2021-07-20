@@ -7,6 +7,7 @@ import com.blade.kit.json.JSON;
 import com.blade.kit.json.JSONArray;
 import com.blade.kit.json.JSONObject;
 import com.zhangyibin.wechat.util.*;
+import com.zhangyibin.wechat.robot.Turing;
 
 public class WechatMsg extends WechatLogin {
 
@@ -191,7 +192,10 @@ public class WechatMsg extends WechatLogin {
             /*
              * 黑名单判断逻辑如下：
              * 1.如果好友备注名称在黑名单列表中，那么系统自动回复预先设置好的消息内容"。
-             * 2.如果好友备注名称不在黑名单列表中，那么提示"不回复该好友消息!"(设置黑名单是对白名单好友表示尊重)。
+             * 2.如果好友备注名称不在黑名单列表中，那么"不回复该好友消息!"(设置黑名单是对白名单好友表示尊重)。
+             * 3.黑名单的消息内容答复机制：
+             *   a.判断message为空：那么消息的答复内容就调用图灵机器人的消息。
+             *   b.判断message非空：那么就以默认设置的消息进行回复。
              *
              */
             for (String blackListName : blackList) {
@@ -199,7 +203,13 @@ public class WechatMsg extends WechatLogin {
                     if (msgType == 1) {
                         System.out.println("来自好友" + partnerName + "的消息内容: " + receiveMessages);
                         String replyMessage = "";// ReplyMessage 回复好友消息
-                        replyMessage = message;
+                        if (message.equals("")) {
+                            replyMessage = Turing.getTuring(receiveMessages).getTuringReplyMessage();
+
+                        } else {
+                            replyMessage = message;
+
+                        }
                         this.sendMessage(replyMessage, msg.getString("FromUserName")); // 回复好友消息
                         System.out.println("回复好友" + partnerName + "的消息内容: " + replyMessage);
 
