@@ -1,5 +1,7 @@
 # 微信幽灵
 
+「更新提示」 WeChatSpecter-1.1.2.jar （Bug修复版）已发布。
+
 微信幽灵(WeChatSpecter)基于网页版微信实现了一套使用Java语言编写的消息管理机制。
 
 ### 快速上手
@@ -35,27 +37,32 @@
 
 ### 实现机制
 
-· 获取到uuid；<br>
+· 获取到uuid(通用唯一识别码)；<br>
 · 基于uuid可成功获得微信登陆二维码；<br>
 · 使用手机微信扫码登录；<br>
 · 初始化消息和微信好友列表；<br>
 · 启动微信消息监听机制；<br>
 · 获得好友消息内容可实现消息回复；<br>
 
+项目运行机制详情如下：
+![avatar](resources/项目时序图.png)
+
 ### API参考
 
-点击查看：[API文件](docs/index.html) <br>
-下载文件(版本：1.1.2)：[WeChatSpecter.jar](out/artifacts/wechatspecter_jar/wechatspecter.jar)
+点击查看：https://zhyblx.github.io/VersioningDemo/demo/index.html
 
 ### 版本更新
 
-|版本号|发布日期|
-|---|---|
-|v1.1.2|2021年7月20日|
-|v1.1.1|2021年6月29日|
-|v1.1.0|2021年6月22日|
-|v1.0.2(Beta)|2021年6月21日|
-|v1.0|2021年6月13日|
+|版本号|下载链接|提取密码|发布日期|
+|---|---|---|---|
+|v1.1.2|https://pan.baidu.com/s/1Vkfus4UB-93UJMdJVhpq2w|mzrq|2021年7月20日|
+|v1.1.1|https://pan.baidu.com/s/16lfacOMzL6mo8Bp7P_ILyw|zb53|2021年6月29日|
+|v1.1.0|https://pan.baidu.com/s/1GCiSX23vh6mzTuyJC77FHA|2ccf|2021年6月22日|
+|v1.0.2|https://pan.baidu.com/s/1PDkvA7PsRbSjd7D7svHGvw|6ym2|2021年6月21日|
+|v1.0.1|https://pan.baidu.com/s/15MBGWfBlrbwsrsoZB14YEA|q2bv|2021年6月19日|
+|v1.0|https://pan.baidu.com/s/1YPzATHWj8ZNtJhNGDo2rpQ|7c6w|2021年6月13日|
+
+* 此项目我会持续（不定时）的进行更新，也请喜欢的同学长期关注。
 
 ### 免责声明
 
